@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const Assignment = require('./database/Assignment');
 
@@ -10,6 +11,11 @@ const {
 
 // Create an Express instance
 const app = express();
+// This allows cross-origin requests from any domain,
+// which is useful for development purposes only.
+app.use(cors({ origin: '*' }));
+// Parse incoming JSON requests automatically
+app.use(express.json());
 
 // Returns all assignments
 app.get('/assignments', async (req, res) => {

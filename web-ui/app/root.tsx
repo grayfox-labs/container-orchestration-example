@@ -8,20 +8,8 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
-import "./app.css";
-
-export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
-];
+import { Grommet } from "grommet";
+import { hpe } from "grommet-theme-hpe";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -33,9 +21,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+        <Grommet full theme={hpe} themeMode="dark">
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </Grommet>
       </body>
     </html>
   );

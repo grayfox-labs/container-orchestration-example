@@ -1,0 +1,36 @@
+name: assignments-app
+
+services:
+  web:
+    build:
+      context: ./web-ui
+      dockerfile: Dockerfile
+      args:
+        - ASSIGNMENTS_API_HOST=assignments
+        - SUBMISSIONS_API_HOST=submissions
+    ports:
+      - "5173:5173"
+    depends_on:
+      - assignments
+      - submissions
+      - db
+
+  assignments:
+    build:
+      context: ./assignments-api
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+  submissions:
+    build:
+      context: ./submission-api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+

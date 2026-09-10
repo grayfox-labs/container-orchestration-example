@@ -3,6 +3,8 @@ import { useState } from "react";
 import type { Assignment } from "../types/Assignment";
 import type { SubmissionResult } from "../types/SubmissionResult";
 
+const SUBMISSIONS_API_HOST = import.meta.env.VITE_SUBMISSIONS_API_HOST || 'localhost';
+
 export default function AssignmentCard({ assignment }: { assignment: Assignment }) {
   const [submitted, setSubmitted] = useState(false);
   const [submissionResult, setSubmissionResult] = useState<SubmissionResult | null>(null);
@@ -11,7 +13,7 @@ export default function AssignmentCard({ assignment }: { assignment: Assignment 
     setSubmitted(true);
 
     try {
-      const response = await fetch(`http://localhost:8000/submit/${assignment.id}`, {
+      const response = await fetch(`http://${SUBMISSIONS_API_HOST}:8000/submit/${assignment.id}`, {
         method: "POST",
       });
       const result: SubmissionResult = await response.json();

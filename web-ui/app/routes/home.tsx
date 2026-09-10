@@ -4,6 +4,8 @@ import AssignmentCard from "../components/AssignmentCard";
 import type { Route } from "./+types/home";
 import type { Assignment } from "../types/Assignment";
 
+const ASSIGNMENTS_API_HOST = import.meta.env.VITE_ASSIGNMENTS_API_HOST || 'localhost';
+
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Assignments" },
@@ -14,8 +16,8 @@ export default function Home() {
   const [assignments, setAssignments] = useState<Assignment[]>([]);
 
   useEffect(() => {
-    // Fetch assignments from an API or other source
-    fetch("http://localhost:3000/assignments")
+    // Fetch assignments from the API
+    fetch(`http://${ASSIGNMENTS_API_HOST}:3000/assignments`)
       .then((response) => response.json())
       .then((data) => setAssignments(data))
       .catch((error) => console.error("Error fetching assignments:", error));

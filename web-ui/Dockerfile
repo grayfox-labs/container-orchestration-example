@@ -9,6 +9,12 @@ WORKDIR /app
 RUN npm ci --omit=dev
 
 FROM node:24-alpine AS build-env
+
+ARG ASSIGNMENTS_API_HOST
+ARG SUBMISSIONS_API_HOST
+ENV VITE_ASSIGNMENTS_API_HOST=$ASSIGNMENTS_API_HOST
+ENV VITE_SUBMISSIONS_API_HOST=$SUBMISSIONS_API_HOST
+
 COPY . /app/
 COPY --from=development-dependencies-env /app/node_modules /app/node_modules
 WORKDIR /app

@@ -6,6 +6,7 @@ import type { Assignment } from "../types/Assignment";
 
 const ASSIGNMENTS_API_HOST = import.meta.env.VITE_ASSIGNMENTS_API_HOST || 'localhost';
 
+// Sets the page title in the Browser, or set other page metadata
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Assignments" },
@@ -13,8 +14,10 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  // Holds the Assignments we get from the API
   const [assignments, setAssignments] = useState<Assignment[]>([]);
 
+  // Called once when the page first loads
   useEffect(() => {
     // Fetch assignments from the API
     fetch(`http://${ASSIGNMENTS_API_HOST}:3000/assignments`)
@@ -22,6 +25,7 @@ export default function Home() {
       .then((data) => setAssignments(data))
       .catch((error) => console.error("Error fetching assignments:", error));
   }, []);
+
   return (
     <Page kind="narrow">
       <Header background="brand" justify="center">
@@ -30,6 +34,7 @@ export default function Home() {
 
       <PageContent>
         <Box pad="medium" direction="column" gap="medium">
+          {/* Loop through our list of Assignments and render each */}
           {assignments.map((assignment) => (
             <AssignmentCard key={assignment.id} assignment={assignment} />
           ))}

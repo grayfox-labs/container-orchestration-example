@@ -6,11 +6,18 @@ services:
       context: ./web-ui
       dockerfile: Dockerfile
     ports:
-      - "5173:5173"
+      - "4000:4000"
     depends_on:
       - assignments
       - submissions
       - db
+    # Scaling the application using Docker compose
+    # requires an additional proxy service, but could be
+    # done with this setup alongside Nginx or other proxy
+    # deploy:
+    #   endpoint_mode: vip
+    #   mode: replicated
+    #   replicas: 2
 
   assignments:
     build:
@@ -20,6 +27,7 @@ services:
       - "3000:3000"
     environment:
       - MONGO_URI=mongodb://db:27017
+      - EXPRESS_PORT=3000
 
   submissions:
     build:
@@ -29,6 +37,7 @@ services:
       - "8000:8000"
     environment:
       - ROCKET_ADDRESS=0.0.0.0
+      - ROCKET_PORT=8000
 
   db:
     image: mongo

@@ -1,87 +1,33 @@
-# Welcome to React Router!
+# React Web UI
 
-A modern, production-ready template for building full-stack React applications using React Router.
+This directory contains all of the source code for the Web UI.
+We've started with a base created by the React Router Vite template which adds lots of helpful boilerplate files for us.
+We've removed a lot of the original setup since for this example, most of it was not needed.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## The Root
 
-## Features
+This application sets up a main `root.tsx`, a React TypeScript that defines how our generated HTML base will be created.
+It also initializes our Page routing as well by creating a basic configuration.
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## Routes
 
-## Getting Started
+This application only defined one route, the homepage, but more could easily be added inside of `routes.ts`.
+This file tells React Router which Component to render when a user navigates to a specific endpoint.
+Here we've let React Router know that we'll use the configuration from `routes/home.tsx` as our `/` index route.
 
-### Installation
+## Components
 
-Install the dependencies:
+We've created a custom `AssignmentCard` component that renders data collected from the Assignments API.
+This component is reusable and is what allows us to create the list of Assignments on the homepage.
+It takes in a specific data structure and renders it into a template, including making customized function that call the Submission API with information from the Assignment.
 
-```bash
-npm install
-```
+## Types
 
-### Development
+Since we're using TypeScript, we've created type definitions for the Assignment and Submission Results that are returned from the APIs.
+Using these types, we can make sure the data we're getting back from the API matches the structure that we're expecting.
+It's also helpful when creating components as we're able to quickly specify what data a Component is expecting to receive as its properties.
 
-Start the development server with HMR:
+## React Router Readme
 
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+Also check out the [generated README](./REACT_ROUTER_README.md) made by the React Router Vite template.
+You can see how to build the application or run it in development mode here.

@@ -5,7 +5,8 @@ const Assignment = require('./database/Assignment');
 
 // Extract environment variables and assign default values if not provided
 const {
-  EXPRESS_PORT = 3000,
+  EXPRESS_PORT = 4000,
+  EXPRESS_HOST = '0.0.0.0',
   MONGO_URI = 'mongodb://localhost:27017'
 } = process.env;
 
@@ -71,7 +72,7 @@ mongoose.connect(MONGO_URI)
     }
 
     // Start Express and listen on the specified port
-    app.listen(EXPRESS_PORT, () => {
+    app.listen(EXPRESS_PORT, EXPRESS_HOST, () => {
       console.log(`Server is running on port ${EXPRESS_PORT}`);
     });
   })

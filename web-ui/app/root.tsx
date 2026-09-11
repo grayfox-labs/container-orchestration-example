@@ -11,6 +11,11 @@ import type { Route } from "./+types/root";
 import { Grommet } from "grommet";
 import { hpe } from "grommet-theme-hpe";
 
+/**
+ * Creates the HTML template that all pages will extend.
+ * Pages are inserted into this template using the `children` variable
+ * and rendered inside the main `Grommet` component.
+ */
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
